@@ -42,7 +42,7 @@ Readers who master the techniques in this book will be equipped to use R to carr
 excellent commercial statistical packages should be able to adapt what they have
 learned to the particular command syntax and output style of that package.
 
-1.2 What You Need to Know to Use This Book
+### 1.2 What You Need to Know to Use This Book
 Survival analysis resembles linear and logistic regression analysis in several ways:
 there is (typically) a single outcome variable and one or more predictors; testing
 statistical hypotheses about the relationship of the predictors to the outcome
@@ -70,12 +70,11 @@ vectors, matrices, data structures and components, and data frames. He or she sh
 also be sufficiently familiar with R to carry out basic data analyses and make data
 plots, as well as understand how to install in R packages from the main CRAN
 (Comprehensive R Archive Network) repository.
-1.3 Survival Data and Censoring
+
+### 1.3 Survival Data and Censoring
 A key characteristic of survival data is that the response variable is a non-negative
 discrete or continuous random variable, and represents the time from a well-
-defined origin to a well-defined event. A second characteristic of survival analysis,1.3 Survival Data and Censoring
-3
-censoring, arises when the starting or ending events are not precisely observed.
+defined origin to a well-defined event. A second characteristic of survival analysis, censoring, arises when the starting or ending events are not precisely observed.
 The most common example of this is right censoring, which results when the final
 endpoint is only known to exceed a particular value. Formally, if T  is a random
 variable representing the time to failure and U is a random variable representing
@@ -118,7 +117,9 @@ censoring, which results because some patients in a clinical trial have not yet 
 at the time the analysis is carried out. This concept is illustrated in the following
 example.4
 1 Introduction
-Example 1.1. Consider a hypothetical cancer clinical trial where subjects enter the
+
+### Example 1.1. 
+Consider a hypothetical cancer clinical trial where subjects enter the
 trial over a certain period of time, known as the accrual period, and are followed
 for an additional period of time, known as the follow-up period, to determine their
 survival times. That is, for each patient, we would like to observe the time between
@@ -159,7 +160,9 @@ Patient 5
 Patient 6
 2000 2002 2004 2006 2008
 Year of entry − calendar time
-20101.3 Survival Data and Censoring
+2010
+
+### 1.3 Survival Data and Censoring
 Fig. 1.2 Clinical trial
 survival data, patient time
 5
@@ -229,7 +232,8 @@ two or more survival distributions, or (more generally) to assess the effects of
 number of factors on survival. The techniques bear some resemblance to regression
 analysis, with the important distinctions that the outcome variable (time) is always
 positive and often censored.
-1.4 Some Examples of Survival Data Sets
+
+### 1.4 Some Examples of Survival Data Sets
 Following are a few examples of studies using survival analysis which we will refer
 to throughout the text. The data sets may be obtained by installing the text’s package
 “asaur” from the main CRAN repository. Data for these examples is presented in a
@@ -240,7 +244,9 @@ into a trial and date of death) from which we compute the survival time. All con
 additional variables, such as censoring variables, which indicate that partial time
 information on some subjects is available. Most also contain treatment indicators
 and other covariate information.
-Example 1.2. Xelox in patients with advanced gastric cancer
+
+### Example 1.2. 
+Xelox in patients with advanced gastric cancer
 This is a Phase II (single sample) clinical trial of Xeloda and oxaliplatin (XELOX)
 chemotherapy given before surgery to 48 advanced gastric cancer patients with para-
 aortic lymph node metastasis (Wang et al. [74]). An important survival outcome of
@@ -260,8 +266,8 @@ that the patient was alive at 43 weeks after entry and no progression had been
 observed. 
 We will discuss this data set further in Chap. 3.
 
-Example 1.3. Pancreatic cancer in patients with locally advanced or metastatic
-disease
+### Example 1.3. 
+Pancreatic cancer in patients with locally advanced or metastatic disease
 This is also a single sample Phase II study of a chemotherapeutic compound, and
 the main purpose was to assess overall survival and also “progression-free survival”,
 which is defined as the time from entry into the trial until disease progression
@@ -285,7 +291,9 @@ overall survival is the difference between the date of death and the on-study da
 this study there was no censoring, since none of these seriously ill patients survived
 for very long. In Chap. 3 we will see how to compare the survival of the two groups
 of patients.
-Example 1.4. Survival prospects of prostate cancer patients with high-risk disease
+
+### Example 1.4. 
+Survival prospects of prostate cancer patients with high-risk disease
 In this data set there are two outcomes of interest, death from prostate cancer and
 death from other causes, so we have what is called a competing risks survival
 analysis problem. In this example, we have simulated data from 14,294 prostate
@@ -322,7 +330,9 @@ Sect. 9.2 (competing risks). For older patients (say 85 and older), one can also
 at competing risks if desired, and we do this in Sect. 9.2. But practically speaking,
 the main interest may be in overall mortality among these men, an issue we address
 in Sect. 12.1.
-Example 1.5. Comparison of medical therapies to aid smokers to quit
+
+### Example 1.5. 
+Comparison of medical therapies to aid smokers to quit
 The purpose of this study (Steinberg et al. [63]) was to evaluate extended duration
 of a triple-medication combination versus therapy with the nicotine patch alone in
 smokers with medical illnesses. Patients with a history of smoking were randomly
@@ -341,8 +351,9 @@ variable “grp” is the treatment indicator, and “employment” can take the
 (full time), “pt” (part time), or “other”. The primary objectives were to compare the
 two treatment therapies with regard to time to relapse, and to identify other factors
 related to this outcome.
-Example 1.6. Prediction of survival of hepatocellular carcinoma patients using
-biomarkers
+
+### Example 1.6. 
+Prediction of survival of hepatocellular carcinoma patients using biomarkers
 This study (Li et al. [42, 43]) focused on using expression of a chemokind
 known as CXCL17, and other clinical and biomarker factors, to predict overall and
 recurrence-free survival. This example contains data on 227 patients, each with a
@@ -350,46 +361,16 @@ wide range of clinical and biomarker values. The “hepatoCellular” data are p
 available in the Dryad online data repository [43] as well as in the “asaur” R package
 that accompanies this text. Here, for illustration, is a small selection of cases and
 covariates.
-``` hepatoCellular[c(1, 2, 3, 65, 71),c(2, 3, 16:20, 24, 47)]
-Age Gender OS Death RFS Recurrence
-CXCL17T CD4N
-Ki67
-1
-57
-0 83
-0 13
-1 113.94724
-0 6.04350
-2
-58
-1 81
-0 81
-0 54.07154
-NA
-NA
-3
-65
-1 79
-0 79
-0 22.18883
-NA
-NA
-65 38
-1 5
-1
-5
-1 106.78169
-0 44.24411
-71 57
-1 11
-1 11
-1 98.49680
-0 99.59232
+``` 
+hepatoCellular[c(1, 2, 3, 65, 71),c(2, 3, 16:20, 24, 47)]
+```
+
 The survival outcomes are “OS” (overall survival) and “RFS” (recurrence-free sur-
 vival), and the corresponding censoring indicators are “Death” and “Recurrence”.
 The full data set has 48 columns. In columns 23 to 48 there are many patients with
 missing values, with only 117 patients having complete data.
-1.5 Additional Notes
+
+### 1.5 Additional Notes
 1. Another type of incomplete observation with survival data is truncation, a result
 of length-biased sampling. We discuss left truncation in Sect. 3.5. Right trunca-
 tion is less common and more difficult to model. See Klein and Moeschberger
@@ -413,8 +394,10 @@ has a number of survival analysis data sets. Also, the “KMsurv” R package
 contains a rich additional set of data sets that were discussed in Klein and
 Moeschberger [36]. The “asaur” R package contains data sets used in the current
 text.
-Exercises
-1.1. Consider a simple example of five cancer patients who enter a clinical trial as
+
+## Exercises
+### 1.1. 
+Consider a simple example of five cancer patients who enter a clinical trial as
 illustrated in the following diagram:
 Accrual
 Follow−up
@@ -434,11 +417,14 @@ Re-write these survival times in terms of patient time, and create a simple data
 set listing the survival time and censoring indicator for each patient. How many
 patients died? How many person-years are there in this trial? What is the death rate
 per person-year?
-1.2. For the “gastricXelox” data set, use R to determine how many patients had the
+### 1.2. 
+For the “gastricXelox” data set, use R to determine how many patients had the
 event (death or progression), the number of person-weeks of follow-up time, and
-the event rate per person-week.Chapter 2
-Basic Principles of Survival Analysis
-2.1 The Hazard and Survival Functions
+the event rate per person-week.
+
+# Chapter 2
+## Basic Principles of Survival Analysis
+### 2.1 The Hazard and Survival Functions
 Survival analysis methods depend on the survival distribution, and two key ways of
 specifying it are the survival function and the hazard function. The survival function
 defines the probability of surviving up to a point t. Formally,
@@ -463,19 +449,8 @@ hazard function (a) and the corresponding survival function (b). Next consider t
 In some texts the survival function is defined as S.t/ D Pr.T  t/, resulting in a left-continuous
 survival function. This issue arises with step function survival curves, e.g. the Kaplan-Meier
 estimate discussed in the next chapter.
-© Springer International Publishing Switzerland 2016
-D. Moore, Applied Survival Analysis Using R, Use R!,
-DOI 10.1007/978-3-319-31245-3_2
-1112
-2 Basic Principles of Survival Analysis
-c
-b d
-Time
-Time
-Time
-Hazard
-a
-Time
+
+
 Fig. 2.1 Hazard and survival functions with high initial hazard (a and b) and low initial hazard
 (c and d)
 opposite, where the hazard is initially low, and increases later in life. Such a hazard
@@ -484,7 +459,9 @@ Fig. 2.1 (c) and the corresponding survival in (d).
 Demographic data provide another illustration of hazard and survival functions,
 as shown in the next example, where we see elements of both high early and high
 late hazard functions.
-Example 2.1. The daily hazard rates of men and women by age in each calendar
+
+### Example 2.1. 
+The daily hazard rates of men and women by age in each calendar
 year from 1940 to 2004 are contained in the three-dimensional array “survexp.us”,
 which is part of the R package “survival”. These hazard rates were derived from US
 life tables using methodology described in Therneau and Offord [70]. Figure 2.2
@@ -550,7 +527,8 @@ plotted on a log scale
 The hazard plot in Fig. 2.2 is obtained by plotting “hazMale” and “hazFemale”
 versus “tm”. In Sect. 2.5 we will show how to derive the lifetime survival
 distributions for males and females from the corresponding hazard functions.
-2.2 Other Representations of a Survival Distribution
+
+### 2.2 Other Representations of a Survival Distribution
 In addition to the survival and hazard functions, there are several other ways to
 define a survival distribution. The cumulative distribution function (CDF), which is
 commonly used outside of survival analysis, is given by14
@@ -616,7 +594,7 @@ survival curve is not continuous at 1=2 (if the survival function is a step func
 for example), then the median is taken to be the smallest t such that S.t/  1=2.
 If the survival curve does not drop below 1=2 during the observation period, then of
 course the median survival is undefined.
-2.4 Parametric Survival Distributions
+### 2.4 Parametric Survival Distributions
 Several survival distributions are available for modeling survival data. The exponen-
 tial distribution, the simplest survival distribution, has a constant hazard, h.t/ D .
 The cumulative hazard function may be easily derived using the relationships in the
@@ -678,7 +656,8 @@ t med D Œlog.2/ 1= ̨
 :
  (2.4.2)
 and17
-2.4 Parametric Survival Distributions
+
+### 2.4 Parametric Survival Distributions
 α = 1.5 λ = 0.03
 α= 1
 0.02
@@ -723,18 +702,25 @@ We may generate random variables from the exponential or Weibull distribution
 using the functions “rexp” and “rweib”. For example, we may generate 1000
 Weibull random variables with shape 1.5 and scale 1/0.03, and compute their mean
 and median, as follows:
-``` tt.weib <- rweibull(1000, shape=1.5, scale=1/0.03)
-``` mean(tt.weib)
-[1] 31.35497
-``` median(tt.weib)
-[1] 26.84281
+```R
+tt.weib <- rweibull(1000, shape=1.5, scale=1/0.03)
+mean(tt.weib)
+```
+
+```R
+median(tt.weib)
+```
+
 The theoretical mean and median, using Eqs. 2.4.1 and 2.4.2, are as follows:
-``` gamma(1 + 1/1.5)/0.03
+```
+gamma(1 + 1/1.5)/0.03
+```
 [1] 30.09151
-``` (log(2)^(1/1.5))/0.03
+```
+(log(2)^(1/1.5))/0.03
+```
 [1] 26.10733
-# mean
-# median
+
 The empirical mean and median are close to their theoretical values, as they must be.
 The gamma distribution (not to be confused with the gamma function) provides
 yet another choice for survival modeling. The probability density function is
@@ -757,7 +743,9 @@ This produces the red curve in Fig. 2.5. The other two curves may be obtained
 using “shape = 1” and “shape = 0.75”, along with the “add = T” option. Other
 parametric families of survival distributions include the log-normal (see Exercise 2.6
 for this one), log-logistic, Pareto, and many more. See for example Klein and
-Moeschberger [36] and Cox and Oakes [11] for details.2.5 Computing the Survival Function from the Hazard Function
+Moeschberger [36] and Cox and Oakes [11] for details.
+
+### 2.5 Computing the Survival Function from the Hazard Function
 Fig. 2.5 Gamma hazard
 functions
 19
@@ -772,8 +760,8 @@ functions
 60
 80
 Time
-2.5 Computing the Survival Function
-from the Hazard Function
+
+### 2.5 Computing the Survival Function from the Hazard Function
 If we know the hazard function of a survival random variable, we may derive the
 survival function using Eq. 2.2.1. For some parametric families, this is simple to do.
 But if the hazard function is more complicated, we need to use numerical methods
@@ -785,9 +773,11 @@ the cumulative hazard to get “survMale” and “survFemale”. The survival f
 in Fig. 2.2 result from plotting these survival functions versus “tm”. In the following
 code, “tm.diff” is the width of each rectangle, and “survMale” and “survFemale”
 represent the survival curves for males and females, respectively.
-``` tm.diff <- diff(tm)
-``` survMale <- exp(-cumsum(hazMale*tm.diff)*365.24)
-``` survFemale <- exp(-cumsum(hazFemale *tm.diff)*365.24)
+```R
+tm.diff <- diff(tm)
+survMale <- exp(-cumsum(hazMale*tm.diff)*365.24)
+survFemale <- exp(-cumsum(hazFemale *tm.diff)*365.24)
+```
 The diagram in Fig. 2.6 illustrates the computation of the cumulative hazard at
 time t D 1:5, which is the shaded area.
 This representation of the hazard function is an example of a piecewise exponen-
@@ -807,13 +797,18 @@ area represents the cumulative hazard at 1.5 years
 of each rectangle and “survMale” and “survFemale” are the heights of the rectangles
 for men and women, respectively. The sum of the areas of the rectangles gives the
 value of the integral:
-``` sum(survMale *tm.diff)
+```
+sum(survMale *tm.diff)
+```
 [1] 73.8084
-``` sum(survFemale *tm.diff)
+```
+sum(survFemale *tm.diff)
+```
 [1] 78.90526
 # mean age of male death in 2004
 # mean age of female death in 2004
-2.6 A Brief Introduction to Maximum Likelihood Estimation
+
+## 2.6 A Brief Introduction to Maximum Likelihood Estimation
 The previous sections show us how to compute probabilities for a specific prob-
 ability distribution (e.g., exponential, Weibull, gamma) for specified values of the
 parameters. For example, if we know that a random variable T has an exponential
@@ -822,8 +817,10 @@ T exceeds a particular value. But suppose that we have a series of observations
 t 1 ; t 2 ; : : : ; t n from an exponential distribution with unknown parameter . How can
 we estimate ? The theory of maximum likelihood estimation provides a mathe-
 matical framework for doing this. While a comprehensive discussion of likelihood
-theory is beyond the scope of this book, we may get an overview of the technique2.6 A Brief Introduction to Maximum Likelihood Estimation
-21
+theory is beyond the scope of this book, we may get an overview of the technique
+
+### 2.6 A Brief Introduction to Maximum Likelihood Estimation
+
 by considering a simple example using the exponential distribution. We construct a
 likelihood by taking a product of terms from the exponential distribution, one for
 each observation. If there is no censoring, the likelihood function takes the general
@@ -925,7 +922,7 @@ are multiple parameters, a covariance matrix) that is the inverse of the informa
 or minus the second derivative of the log-likelihood theory. The generality of the
 method makes it a central part of statistical theory and practice.23
 −12
-2.7 Additional Notes
+### 2.7 Additional Notes
 0.00
 0.05
 0.10
@@ -936,7 +933,7 @@ method makes it a central part of statistical theory and practice.23
 λ
 Fig. 2.7 Log-likelihood function for data from Table 1.1, showing the maximum likelihood
 estimate, and the horizontal tangent at the maximum
-2.7 Additional Notes
+ 
 1. Methods for the analysis if human life tables pre-date modern survival analysis as
 described here. See Preston, Heuveline, and Guillot [55] for a thorough modern
 exposition of the methods used in demography.
@@ -954,30 +951,40 @@ here since these are the names of the parameters used by the R Weibull functions
 3. Thorough discussions of maximum likelihood methods in survival analysis may
 be found in the classical references Kalbfleisch and Prentice [34] and Cox and
 Oakes [11].24
-2 Basic Principles of Survival Analysis
-Exercises
-2.1. Using the “survexp.us” data described in Example 2.2, plot the hazard func-
+
+
+## Exercises
+### 2.1. 
+Using the “survexp.us” data described in Example 2.2, plot the hazard func-
 tions for men and women in 1940 and 2000. Comment on the change in mortality
 rates in children.
-2.2. Find the mean age of death separately for men and women for 1940 and 2000.
-2.3. The data set “survexp.usr” in the “survival” package is a four dimensional array
+### 2.2. 
+Find the mean age of death separately for men and women for 1940 and 2000.
+### 2.3. 
+The data set “survexp.usr” in the “survival” package is a four dimensional array
 of hazards in format similar to the “survexp.us” data set, with race (black or white)
 in the added dimension. Plot the hazard functions for black males and white males
 for 1940 and 2000.
-2.4. Consider the survival data in Exercise 1.1. Assuming that these observations
+### 2.4. 
+Consider the survival data in Exercise 1.1. 
+Assuming that these observations
 O
 are from an exponential distribution, find  O and an estimate of var. /.
-2.5. Consider a survival distribution with constant hazard  D 0:07 from t D 0
+### 2.5. 
+Consider a survival distribution with constant hazard  D 0:07 from t D 0
 until t D 5 and then hazard  D 0:14 for t ``` 5. (This is known as a piecewise
 constant hazard.) Plot this hazard function and the corresponding survival function
 for 0 < t < 10. What is the median survival time?
-2.6. Another parametric survival distribution is the log-normal distribution. Use the
+### 2.6.
+Another parametric survival distribution is the log-normal distribution. Use the
 density and cumulative distribution R functions “dlnorm” and “plnorm” to compute
 and plot the lognormal hazard functions with the parameter “meanlog” taking the
 values 0, 1, and 2, and with “sdlog” fixed at 0.25. Describe the risk profile a disease
-would have if it followed one of these hazard functions.Chapter 3
-Nonparametric Survival Curve Estimation
-3.1 Nonparametric Estimation of the Survival Function
+would have if it followed one of these hazard functions.
+
+# Chapter 3
+## Nonparametric Survival Curve Estimation
+### 3.1 Nonparametric Estimation of the Survival Function
 We have seen that there are a wide variety of hazard function shapes to choose
 from if one models survival data using a parametric model. But which parametric
 model should one use for a particular application? When modeling human or
@@ -1005,9 +1012,9 @@ i
 where n i is the number of subjects at risk at time t i , and d i is the number of
 individuals who fail at that time. The example data in Table 1.1 may be used to
 illustrate the construction of the Kaplan-Meier estimate, as shown in Table 3.1.
-© Springer International Publishing Switzerland 2016
-D. Moore, Applied Survival Analysis Using R, Use R!,
-DOI 10.1007/978-3-319-31245-3_3
+
+
+
 2526
 3 Nonparametric Survival Curve Estimation
 Table 3.1 Kaplan-Meier
@@ -1308,8 +1315,8 @@ plot(result.km, conf.int=T, mark="|", xlab="Time in months",
 ylab="Survival probability")
 title("Progression-free Survival in Gastric Cancer Patients")
 Figure 3.3 shows the survival plot.
-3.2 Finding the Median Survival and a Confidence Interval
-for the Median
+
+### 3.2 Finding the Median Survival and a Confidence Interval for the Median
 n
 o
 O  0:5 I
@@ -1905,7 +1912,8 @@ O
 var g S.t/
 where a good choice for the function g.u/ is the complementary log-log
 transformation.42
-3 Nonparametric Survival Curve Estimation
+
+
 3. As discussed in the text, the confidence bands for the survival curve are only
 valid at a pre-specified time point. Simultaneous confidence bands for an entire
 survival curve were developed by Hall and Wellner [27]; see also Kleinbaum and
@@ -1918,19 +1926,25 @@ HIV. Turnbull [73] discusses another approach based on the EM algorithm. The
 R package “DTDA” can estimate non-parametric survival curves for data with
 censoring and left and right truncation. This package also includes a copy of the
 HIV latency blood transfusion dataset used by Lagakos et al. [39].
-Exercises
-3.1. Refer to Fig. 3.2. Find the median survival, and a 95 % confidence interval for
+
+## Exercises
+### 3.1.
+Refer to Fig. 3.2. Find the median survival, and a 95 % confidence interval for
 the median. Explain why the upper limit of the confidence interval is undefined.
-3.2. In Fig. 3.3, find the first and third quartiles, and 95 % confidence intervals for
+### 3.2.
+In Fig. 3.3, find the first and third quartiles, and 95 % confidence intervals for
 these quartiles. If any of these quantities are undefined, explain.
-3.3. Find a smooth hazard function estimate for the gastric cancer data using kernel
+### 3.3.
+Find a smooth hazard function estimate for the gastric cancer data using kernel
 width “bw.grid = 20”. Explain reason for the multiple peaks in the estimate.
-3.4. Estimate the survival distribution for men, conditional on reaching the age of
+### 3.4.
+Estimate the survival distribution for men, conditional on reaching the age of
 68, ignoring the left truncation times. Discuss the bias of this estimate by comparing
-to the estimate presented in Sect. 3.4.Chapter 4
-Nonparametric Comparison of Survival
-Distributions
-4.1 Comparing Two Groups of Survival Times
+to the estimate presented in Sect. 3.4.
+
+# Chapter 4
+## Nonparametric Comparison of Survival Distributions
+### 4.1 Comparing Two Groups of Survival Times
 Testing the equivalence of two groups is a familiar problem in statistics. Typically
 we are interested in testing a null hypothesis that two population means are equal
 versus an alternative that the means are not equal (for a two-sided test) or that the
@@ -1958,11 +1972,11 @@ analysis, since the alternative can take a wide range of forms. What if the surv
 distributions are similar for some values of t and differ for others? What if the
 survival distributions cross? How do we want our test statistic to behave under these
 different scenarios? One solution is to consider what is called a Lehman alternative,
-© Springer International Publishing Switzerland 2016
-D. Moore, Applied Survival Analysis Using R, Use R!,
-DOI 10.1007/978-3-319-31245-3_4
-4344
-4 Nonparametric Comparison of Survival Distributions
+
+
+
+
+
 H A W S 1 .t/ D ŒS 0 .t/ . Equivalently, we can view Lehman alternatives in terms of
 proportional hazards as h 1 .t/ D h 0 .t/. Either way we would construct a one sided
 test as H 0 W
@@ -2545,10 +2559,11 @@ in base R. Compare your results to those from the log-rank and Prentice-modified
 Gehan tests.
 4.4. Again using the “pancreatic” data set, compare the two groups using overall
 survival as the outcome, using both the log-rank test and the Prentice modification
-of the Gehan test. Do these two tests yield different results?Chapter 5
-Regression Analysis Using the Proportional
-Hazards Model
-5.1 Covariates and Nonparametric Survival Models
+of the Gehan test. Do these two tests yield different results?
+
+# Chapter 5
+## Regression Analysis Using the Proportional Hazards Model
+### 5.1 Covariates and Nonparametric Survival Models
 In the previous chapter we saw how to compare two survival distributions without
 assuming a particular parametric form for the survival distributions, and we also
 introduced a parameter
@@ -2574,9 +2589,9 @@ of censoring, makes survival modeling particularly complicated. In this chapter
 we shall see how to do this using what we shall call a partial likelihood. This
 modification of the standard likelihood was developed initially by D.R. Cox [12],
 and hence is often referred to as the Cox proportional hazards model.
-© Springer International Publishing Switzerland 2016
-D. Moore, Applied Survival Analysis Using R, Use R!,
-DOI 10.1007/978-3-319-31245-3_5
+
+
+
 5556
 5 Regression Analysis Using the Proportional Hazards Model
 5.2 Comparing Two Survival Distributions Using
@@ -3403,9 +3418,11 @@ Which approximate method gives a result closest to that from the exact method?
 in Sect. 5.2. Use the “basehaz” function to obtain an estimate of the baseline
 cumulative hazard function. Use this to compute the predicted survival curves for
 the control and experimental groups based on the proportional hazards model we
-fitted in Sect. 5.2.Chapter 6
-Model Selection and Interpretation
-6.1 Covariate Adjustment
+fitted in Sect. 5.2.
+
+# Chapter 6
+## Model Selection and Interpretation
+### 6.1 Covariate Adjustment
 Survival analysis studies typically include a wealth of clinical, demographic, and
 biomarker information on the patients as well as indicators for a therapy or other
 intervention. If the study is a randomized clinical trial, the focus will be on
@@ -3437,10 +3454,10 @@ on 1 df, p=8.2e-05
 O is 0.464.
 We see that the estimate of the log hazard ratio treatment effect, ˇ;
 Since this is positive, higher hazards are associated with the treatment than with
-© Springer International Publishing Switzerland 2016
-D. Moore, Applied Survival Analysis Using R, Use R!,
-DOI 10.1007/978-3-319-31245-3_6
-7374
+
+
+
+
 6 Model Selection and Interpretation
 the control. That is, the treatment appears to reduce survival, which would be an
 O
@@ -3448,8 +3465,10 @@ unfortunate result. The value of e ˇ D 1:59 is also given, suggesting (incorrec
 we know) that the treatment is associated with a 59 % additional risk of death over
 the control. We can stratify on genotype, just as we did previously with the log-rank
 test, as follows:
-``` coxph(Surv(ttAll, status) ~ trt + strata(genotype))
+``` 
+coxph(Surv(ttAll, status) ~ trt + strata(genotype))
 coef exp(coef) se(coef)
+```
 z
 p
 trt -0.453
@@ -3460,8 +3479,10 @@ on 1 df, p=0.00566
 Now the coefficient is negative, indicating that, within each genotype, the treatment
 is effective. With the Cox model, we also have the option of explicitly estimating
 the genetic effect,
-``` coxph(Surv(ttAll, status) ~ trt + genotype)
+``` 
+coxph(Surv(ttAll, status) ~ trt + genotype)
 coef exp(coef) se(coef)
+```
 z
 p
 trt
@@ -3558,7 +3579,9 @@ We use the function “factor” to convert a vector of character variables to o
 type “factor”; this conversion will make it easier to incorporate this variable into
 statistical models. We may create a matrix of dummy variables for race and also a
 column for age using the “model.matrix” function as follows:
-``` model.matrix(~ race + age)[,-1]
+``` 
+model.matrix(~ race + age)[,-1]
+```
 raceother racewhite age
 1
 0
@@ -3584,8 +3607,10 @@ we do not include an intercept term. The first column contains indicators for �
 race” and the second for “white race”; both are compared to “black race” here. If we
 need to use whites as the reference, we can change the race factor to have “white”
 as the reference level,
-``` race <- relevel(race, ref="white")
-``` model.matrix(~ race + age)[,-1]
+``` 
+race <- relevel(race, ref="white")
+model.matrix(~ race + age)[,-1]
+```
 raceblack raceother age
 1
 1
@@ -3617,7 +3642,9 @@ represents the change in log hazard ratio that would correspond to a one-year ch
 in age.
 If we wish to include an interaction between race and age, we can express it as
 follows:
-``` model.matrix(~ race + age + race:age)[,-1]
+```
+model.matrix(~ race + age + race:age)[,-1]
+```
 raceblack raceother age raceblack:age raceother:age
 1
 1
@@ -3671,9 +3698,11 @@ Finally, we define the exponential survival variables, with no censoring:
 tt <- rexp(n=60, rate=exp(log.rate.vec))
 status <- rep(1, 60)
 Now we can fit a Cox proportional hazards model,
-``` library(survival)
-``` result.cox <- coxph(Surv(tt, status) ~ race + age)
-``` summary(result.cox)78
+``` 
+library(survival)
+result.cox <- coxph(Surv(tt, status) ~ race + age)
+summary(result.cox)78
+```
 n= 60, number of events= 60
 coef exp(coef) se(coef)
 raceblack 1.15154
@@ -3689,7 +3718,7 @@ z
 3.133
 5.820
 5.385
-Pr(```|z|)
+Pr(>|z|)
 0.00173 **
 5.87e-09 ***
 7.24e-08 ***
@@ -3720,15 +3749,23 @@ Here, Model A is nested in Model C, and Model B is also nested in Model C, so
 these models can be compared using statistical tests. But Models A and B can’t be
 directly compared in this way. Now, “ageGroup4” and “employment” are covariates
 with four and three levels, respectively:
-``` levels(ageGroup4)
+``` 
+levels(ageGroup4)
+```
 [1] "21-34" "35-49" "50-64" "65+"
-``` levels(employment)
+```
+levels(employment)
+```
 [1] "ft"
 "other" "pt"
 where “ft” and “pt” refer to full-time and part-time employment, respectively. When
 we fit these models in R, it will by default choose the first level as the reference level:
-``` modelA.coxph <- coxph(Surv(ttr, relapse) ~ ageGroup4)
-``` modelA.coxph
+``` 
+modelA.coxph <- coxph(Surv(ttr, relapse) ~ ageGroup4)
+```
+```
+modelA.coxph
+```
 coef exp(coef) se(coef)
 z
 p
@@ -3745,9 +3782,13 @@ Likelihood ratio test=12.2
 0.336 -2.3551 0.019
 0.444 -0.7153 0.470
 on 3 df, p=0.00666
-``` modelB.coxph <- coxph(Surv(ttr, relapse) ~ employment)
-``` modelB.coxph
+``` 
+modelB.coxph <- coxph(Surv(ttr, relapse) ~ employment)
+```
+``` 
+modelB.coxph
 coef exp(coef) se(coef)
+```
 z
 p
 employmentother 0.198
@@ -3759,11 +3800,10 @@ employmentpt
 0.323 1.394 0.16
 Likelihood ratio test=2.06
 on 2 df, p=0.357
-``` modelC.coxph <- coxph(Surv(ttr, relapse) ~ ageGroup4 +
-+
-employment)
-``` modelC.coxph
-coef exp(coef) se(coef)
+``` 
+modelC.coxph <- coxph(Surv(ttr, relapse) ~ ageGroup4 + employment)
+modelC.coxph coef exp(coef) se(coef)
+```
 z
 p
 ageGroup435-49 -0.130
@@ -3796,11 +3836,17 @@ seen as not quite statistically significant at the 0.05 level. But we cannot eas
 from these p-values whether or not the term “ageGroup4” or the term “employment”
 belong in the model. These we can assess using a (partial) likelihood ratio test. The
 log-likelihoods for the three models are as follows:
-``` logLik(modelA.coxph)
+``` 
+logLik(modelA.coxph)
+```
 ’log Lik.’ -380.043 (df=3)
-``` logLik(modelB.coxph)
+```
+logLik(modelB.coxph)
+```
 ’log Lik.’ -385.1232 (df=2)
-``` logLik(modelC.coxph)
+``` 
+logLik(modelC.coxph)
+```
 ’log Lik.’ -377.7597 (df=5)
 Let us begin be determining if “ageGroup4” belongs in the model by comparing
 Models A and C. The null hypothesis is that the three coefficients for “ageGroup4”
@@ -3814,7 +3860,9 @@ This is twice the difference between the partial log-likelihood evaluated at the
 model (Model C) and the value at the “reduced” model (Model A), We compare
 this to a chi-square distribution with 5  3 D 2 degrees of freedom, which is the
 difference in degrees of freedom for the two models. The p-value is thus
-``` pchisq(4.567, df=2, lower.tail=F)
+``` 
+pchisq(4.567, df=2, lower.tail=F)
+```
 [1] 0.1019268
 and we would conclude that the effect of “ageGroup4” is not statistically significant
 when “employment” is included in the model.
@@ -3824,15 +3872,21 @@ Similarly we can compare Models B and C to test for the importance of
 
 2 l. ˇ O full  l. ˇ O reduced D 2.377:7597 C 385:1232/ D 14:727:
 We compare this to a chi-square distribution with 5  2 D 3 degrees for freedom:
-``` pchisq(14.727, df=3, lower.tail=F)
+``` 
+pchisq(14.727, df=3, lower.tail=F)
+```
 [1] 0.002065452
 We thus conclude that “employment” belongs in the model if “ageGroup4” is also
 included, since the p-value for the former is extremely small.
 Should “ageGroup4” even be in the model? To carry out a likelihood ratio test
 for this factor we need to refer to what we shall call the “null” model, one with no
 covariates. We may evaluate this as follows:
-``` model.null.coxph <- coxph(Surv(ttr, relapse) ~ 1)
-``` logLik(model.null.coxph)
+``` 
+model.null.coxph <- coxph(Surv(ttr, relapse) ~ 1)
+```
+``` 
+logLik(model.null.coxph)
+```
 ’log Lik.’ -386.1533 (df=0)
 (The “logLik” function also returns a warning connected to having zero degrees of
 freedom. We may ignore this, since the value of the log likelihood is correct.) This
@@ -3842,7 +3896,9 @@ we may compute the likelihood ratio test as follows:
 
 2 l. ˇ O full  l. ˇ O reduced D 2.380:043 C 386:1533/ D 12:2206
 which we compare to a chi-square distribution with 3  0 D 3 degrees of freedom:
-``` pchisq(12.2206, df=3, lower.tail=F)
+``` 
+pchisq(12.2206, df=3, lower.tail=F)
+```
 [1] 0.006664445
 This result, which shows that “ageGroup4” by itself is strongly statistically signifi-
 cant, is identical to the results given above in the output from Model A. In fact, the
@@ -3855,12 +3911,14 @@ e.g., 16:8  12:2 D 4:6, which (to one decimal place) is identical to the value6
 we computed using the “logLik” function. A more direct way to compare models
 is using the “anova” function, which directly computes test statistic, degrees of
 freedom, and p-value:
-``` anova(modelA.coxph, modelC.coxph)
+``` 
+anova(modelA.coxph, modelC.coxph)
+```
 Analysis of Deviance Table
 Cox model: response is Surv(ttr, relapse)
 Model 1: ~ ageGroup4
 Model 2: ~ ageGroup4 + employment
-loglik Chisq Df P(```|Chi|)
+loglik Chisq Df P(>|Chi|)
 1 -380.04
 2 -377.76 4.5666 2
 0.1019
@@ -3907,11 +3965,17 @@ model is one that fits the data well (small value of 2  l. ˇ/)
 example, again considering the “pharmacoSmoking” model, we can compute the
 AIC for model A as follows: AIC D 2  380:043 C 2  2 D 766:086. But it is more
 convenient to use the “AIC” function:
-``` AIC(modelA.coxph)
+``` 
+AIC(modelA.coxph)
+```
 [1] 766.086
-``` AIC(modelB.coxph)
+```
+AIC(modelB.coxph)
+```
 [1] 774.2464
-``` AIC(modelC.coxph)
+```
+AIC(modelC.coxph)
+```
 [1] 765.5194
 The best fitting model from among these three, using the AIC criterion, is then
 Model C. This is the model that includes both “ageGroup4” and “employment”.
@@ -3946,7 +4010,7 @@ AIC
 - levelSmoking
 1 768.47
 - longestNoSmoke 1 769.04
-<none```
+<none>
 770.20
 - employment
 2 772.45
@@ -3961,7 +4025,7 @@ AIC=758.42 Surv(ttr, relapse) ~ grp + employment
 + ageGroup4
 Df
 AIC
-<none```
+<none>
 758.42
 + longestNoSmoke 1 759.10
 - employment
@@ -3981,7 +4045,9 @@ AIC
 The “+” sign shows the effect on AIC of adding certain terms. This table shows
 that no addition or subtraction of terms results in further reduction of the AIC. The
 coefficient estimates for the final model are
-``` result.step
+``` 
+result.step
+```
 coef exp(coef) se(coef)
 z
 p
@@ -4075,10 +4141,10 @@ maximized, balances goodness of fit against complexity. For details of this meth
 see Therneau and Grambsch [68].
 This “pspline” function may be used with “coxph” to fit a smoothing spline to
 the pharmacoSmoking data as follows:
-``` modelS4.coxph <- coxph(Surv(ttr, relapse) ~ grp + employment +
-+
-pspline(age, df=4) )
-``` modelS4.coxph6.5 Including Smooth Estimates of Continuous Covariates in a Survival Model
+```
+modelS4.coxph <- coxph(Surv(ttr, relapse) ~ grp + employment ++ pspline(age, df=4) )
+```
+modelS4.coxph6.5 Including Smooth Estimates of Continuous Covariates in a Survival Model
 85
 Fig. 6.2 Penalized spline fit
 of age
@@ -4148,9 +4214,11 @@ spline model and plot it, as we did in Sect. 6.5. Does this suggest that categor
 CXCL17 would be appropriate?
 6.2. For the covariates with complete data (in Columns 1–22), use stepwise
 regression with AIC to identify the best model for (a) overall survival, and
-(b) recurrence-free survival.Chapter 7
-Model Diagnostics
-7.1 Assessing Goodness of Fit Using Residuals
+(b) recurrence-free survival.
+
+# Chapter 7
+## Model Diagnostics
+## 7.1 Assessing Goodness of Fit Using Residuals
 The use of residuals for model checking has been well-developed in linear regres-
 sion theory (see for example Weisberg, 2014 [77]). The residuals are plotted versus
 some quantity, such as a covariate value, and the observed pattern is used to diagnose
@@ -4173,9 +4241,9 @@ These residuals, which originate from the counting process theory underlying the
 Cox proportional hazards model, sum to 1, range in value from 1 to a maximum
 of 1, and each has an expected value of zero. The residual is essentially the
 difference between the observed value (1 or 0) of the censoring indicator and its
-© Springer International Publishing Switzerland 2016
-D. Moore, Applied Survival Analysis Using R, Use R!,
-DOI 10.1007/978-3-319-31245-3_7
+
+
+
 8788
 7 Model Diagnostics
 expected value under a particular Cox model. The asymmetry of the residuals might
@@ -4204,13 +4272,17 @@ get a preliminary assessment of which of these predictors should be in the model
 and what form they should take. We first read in the data and truncate the variable
 “priorAttempts” at 20, since recorded values of this variable that exceed 20 are not
 likely to be correct,
-``` pharmacoSmoking <- read.csv("PharmacoSmoking.csv")
-``` priorAttemptsT <- priorAttempts
-``` priorAttemptsT[priorAttempts ``` 20] <- 20
+```
+pharmacoSmoking <- read.csv("PharmacoSmoking.csv")
+priorAttemptsT <- priorAttempts
+priorAttemptsT[priorAttempts ``` 20] <- 20
+```
 We may fit the null model and obtain these residuals as follows:
-``` library(survival)
-``` result.0.coxph <- coxph(Surv(ttr, relapse) ~ 1)
-``` rr.0 <- residuals(result.0.coxph, type="martingale")
+```
+library(survival)
+result.0.coxph <- coxph(Surv(ttr, relapse) ~ 1)
+rr.0 <- residuals(result.0.coxph, type="martingale")
+```
 We next assess the potential relationship of survival to age, prior attempts at
 quitting, and longest prior period without smoking. We plot these null model
 residuals versus each of these variables and also versus log transformations of
@@ -4281,46 +4353,44 @@ three continuous predictors and one log-transformed predictor
 In this figure, the three plots on the left are for untransformed variables, and the
 three on the right are for log transformations of these variables.
 ```
-```
-```
-``` par(mfrow=c(3,2))
+par(mfrow=c(3,2))
 plot(rr.0 ~ age)
 smoothSEcurve(rr.0, age)
 title("Martingale residuals\nversus age")
 ```
+
 ```
-```
-``` logAge <- log(age)
+logAge <- log(age)
 plot(rr.0 ~ logAge)
 smoothSEcurve(rr.0, logAge)
 title("Martingale residuals\nversus log age")90
+```
 7 Model Diagnostics
-``` plot(rr.0 ~ priorAttemptsT)
-``` smoothSEcurve(rr.0, priorAttemptsT)
-``` title("Martingale residuals versus\nprior attempts")
 ```
+plot(rr.0 ~ priorAttemptsT)
+smoothSEcurve(rr.0, priorAttemptsT)
+title("Martingale residuals versus\nprior attempts")
 ```
+
 ```
-``` logPriorAttemptsT <- log(priorAttemptsT + 1)
+logPriorAttemptsT <- log(priorAttemptsT + 1)
 plot(rr.0 ~ logPriorAttemptsT)
 smoothSEcurve(rr.0, logPriorAttemptsT)
 title("Martingale residuals versus\nlog prior attempts")
 ```
 ```
-```
-+ plot(rr.0 ~ longestNoSmoke)
+plot(rr.0 ~ longestNoSmoke)
 smoothSEcurve(rr.0, longestNoSmoke)
 title("Martingale residuals versus\n
 longest period without smoking")
 ```
 ```
-```
-```
-+ logLongestNoSmoke <- log(longestNoSmoke+1)
+logLongestNoSmoke <- log(longestNoSmoke+1)
 plot(rr.0 ~ logLongestNoSmoke)
 smoothSEcurve(rr.0, logLongestNoSmoke)
 title("Martingale residuals versus\n
 log of longest period without smoking")
+```
 In each case, the untransformed variables show considerable non-linearity. Note
 in particular the first plot, versus age, that shows the same non-linear relationship
 we modeled directly (with “pspline”) in Sect. 6.5. This illustrates that the use of
@@ -4330,13 +4400,18 @@ a curve that will be easier to adjust for using linear models, whereas with “a
 “priorAttempts”, the log-transformation doesn’t appear to help.
 As in the previous chapter, we use the “step” function to identify a model with
 low AIC:
+```
 result.grp.coxph <- coxph(Surv(ttr, relapse) ~ grp)
 result.step <- step(result.grp.coxph, scope=list(upper=~ grp +
 gender + race + employment + yearsSmoking +
 levelSmoking + age + priorAttemptsT +
 logLongestNoSmoke, lower=~grp) )
+```
 The resulting model is as follows:
-``` result.step
+```
+result.step
+```
+
 coef exp(coef) se(coef)
 z
 p
@@ -4361,16 +4436,21 @@ on 4 df, p=0.000198
 n= 125, number of
 We may now assess the final model by creating residuals and then plotting them
 versus the final selected predictors,
-``` rr.final <- residuals(result.step, type="martingale")
-``` par(mfrow=c(2,2))7.1 Assessing Goodness of Fit Using Residuals
+``` 
+rr.final <- residuals(result.step, type="martingale")
+par(mfrow=c(2,2))
+```
+7.1 Assessing Goodness of Fit Using Residuals
 91
-``` plot(rr.final ~ age)
-``` smoothSEcurve(rr.final, age)
-``` title("Martingale residuals\nversus age")
-``` plot(rr.final ~ grp)
-``` title("Martingale residuals\nversus treatment group")
-``` plot(rr.final ~ employment)
-``` title("Martingale residuals\nversus employment")
+``` 
+plot(rr.final ~ age)
+smoothSEcurve(rr.final, age)
+title("Martingale residuals\nversus age")
+plot(rr.final ~ grp)
+title("Martingale residuals\nversus treatment group")
+plot(rr.final ~ employment)
+title("Martingale residuals\nversus employment")
+```
 The results, shown in Fig. 7.2, show that the residuals treatment group and
 employment are evenly distributed over the values of the covariates. The variable
 “age” still shows some possible deviation, but it is much improved over the plot for
@@ -4808,9 +4888,11 @@ differences?
 7.2. Consider the CXCL17 model you fitted in Exercise 6.1. Check the functional
 form using martingale residuals, and use case-deletion residuals to identify any
 outlying points. Also use Schoenfeld residuals to check the proportional hazards
-assumption.Chapter 8
-Time Dependent Covariates
-8.1 Introduction
+assumption.
+
+# Chapter 8
+## Time Dependent Covariates
+### 8.1 Introduction
 The partial likelihood theory for survival data, introduced in Chap. 5, allows one to
 model survival times while accommodating covariate information. An important
 caveat to this theory is that the values of the covariates must be determined at
@@ -4843,9 +4925,9 @@ transplant -1.71711
 age
 0.05889
 1.06065 0.01505 3.913 9.12e-05 ***
-© Springer International Publishing Switzerland 2016
-D. Moore, Applied Survival Analysis Using R, Use R!,
-DOI 10.1007/978-3-319-31245-3_8
+
+
+
 101102
 8 Time Dependent Covariates
 surgery
@@ -5482,9 +5564,10 @@ function for g.t/ D log.t  30/. How does the evidence for a treatment effect di
 from the result in Sect. 8.2.1 using g.t/ D log.t  30/?
 8.5. Using the lung data as in Sect. 8.2.2, compute log(age) and fit a Cox model
 using this as a fixed covariate. Then fit log(age) as a time dependent variable, using
-the time transfer function. Do the results differ? Why?Chapter 9
-Multiple Survival Outcomes
-and Competing Risks
+the time transfer function. Do the results differ? Why?
+
+# Chapter 9
+## Multiple Survival Outcomes and Competing Risks
 Until now the type of survival data we have considered has, as an endpoint, a
 single cause of death, and the survival times of each case have been assumed to
 be independent. Methods for analyzing such survival data will not be sufficient if
@@ -5510,9 +5593,9 @@ relatives, and the relatives age at the time she developed breast cancer or curr
 if that relative had never been diagnosed with breast cancer. A subset of this data set
 was constructed to use as an example. This subset consists of 1,960 families with
 two or more female relatives; for those with three or more female relatives, two were
-© Springer International Publishing Switzerland 2016
-D. Moore, Applied Survival Analysis Using R, Use R!,
-DOI 10.1007/978-3-319-31245-3_9
+
+
+
 113114
 9 Multiple Survival Outcomes and Competing Risks
 selected at random. This data set, “askenazi”, is in the “asaur” package. The subset
@@ -7009,9 +7092,11 @@ interaction term. Test for the importance of the interaction term using both a W
 test and a likelihood ratio test.
 9.4. Repeat the calculations of the cumulative incidence functions for death from
 prostate cancer and from other causes from Sect. 9.2.3, but use the age group 75–84
-instead of 85 and above.Chapter 10
-Parametric Models
-10.1 Introduction
+instead of 85 and above.
+
+# Chapter 10
+## Parametric Models
+### 10.1 Introduction
 In biomedical applications, non-parametric (e.g. the product-limit survival curve
 estimator) and semi-parametric (e.g. the Cox proportional hazards model) methods
 play the most important role, since they have the flexibility to accommodate a
@@ -7035,9 +7120,9 @@ The exponential distribution is the simplest distribution to work with. It has a
 constant hazard function, h.t/ D ; which gives it the memory-less property.
 That is, the risk of having the event of interest is the same at any point in time
 as it was at the beginning. The p.d.f. and survival functions are, as discussed in
-© Springer International Publishing Switzerland 2016
-D. Moore, Applied Survival Analysis Using R, Use R!,
-DOI 10.1007/978-3-319-31245-3_10
+
+
+
 137138
 10 Parametric Models
 Chap. 2, f .tI / D e t and S.tI / D e t , respectively. To construct a likelihood
@@ -7913,8 +7998,10 @@ Which covariates are included in both models?
 to the women with the “wild type” (non-mutant) BRCA genotype, matching the
 Kaplan-Meier survival curve at ages 45 and 65. Then predict the probability that a
 woman with the wild type BRCA genotype will develop breast cancer before the
-age of 70.Chapter 11
-Sample Size Determination for Survival Studies
+age of 70.
+
+# Chapter 11
+## Sample Size Determination for Survival Studies
 Deciding how many subjects to include in a randomized clinical trial is a key
 component of its design. In the classical hypothesis testing framework, for any
 type of outcome, one must specify the effect change one is aiming for, the inherent
@@ -7940,9 +8027,9 @@ The null hypothesis mean,  0 D 1= 0 , would correspond to the mean survival
 one has observed in the past for the standard therapy, and the alternative hazard,
  A D 1= A is a (presumably) larger mean survival that we aim to find with a
 new, experimental therapy. Thus, the treatment ratio we would like to detect may
-© Springer International Publishing Switzerland 2016
-D. Moore, Applied Survival Analysis Using R, Use R!,
-DOI 10.1007/978-3-319-31245-3_11
+
+
+
 157158
 11 Sample Size Determination for Survival Studies
 be written as D  A = 0 D  0 = A . After the trial is completed, we obtain a series
@@ -8869,9 +8956,11 @@ Exercise 11.1.
 11.3. Consider the prostate cancer clinical trial of Example 11.1, where there was
 a 10 % non-compliance rate. We found that we had 73.4 % power to detect a hazard
 ratio of 0.75. What would the hazard ratio need to be to be detactable with 80 %
-power?Chapter 12
-Additional Topics
-12.1 Using Piecewise Constant Hazards to Model
+power?
+
+# Chapter 12
+## Additional Topics
+### 12.1 Using Piecewise Constant Hazards to Model
 Survival Data
 The exponential distribution, with its constant hazard assumption, is too inflexible
 to be useful in most lifetime data applications. The piecewise exponential model,
@@ -8914,9 +9003,9 @@ t i denotes the total time at risk. If time is in years, V is the number of
 person-years at risk, for example. As we saw in Chap. 2, the maximum likelihood
 estimate is given by  O D d=V, and we may interpret this estimate as the “crude”
 event rate per person-year (or, more generally, per time unit).
-© Springer International Publishing Switzerland 2016
-D. Moore, Applied Survival Analysis Using R, Use R!,
-DOI 10.1007/978-3-319-31245-3_12
+
+
+
 177178
 12 Additional Topics
 Now let us suppose that the random variable d has a Poisson distribution with
@@ -10211,8 +10300,8 @@ from existing R code must also be made freely available. The absence of any cost
 to downloading and installing R has led to widespread worldwide adoption of the
 system, and encouraged researchers who develop new statistical methods to make
 those methods available in R.
-© Springer International Publishing Switzerland 2016
-D. Moore, Applied Survival Analysis Using R, Use R!,
+
+
 DOI 10.1007/978-3-319-31245-3
 201202
 A Using R for Survival Analysis
@@ -11248,8 +11337,8 @@ frailty model, 116
 partial likelihood, 55
 piecewise exponential distribution, 178
 prediction models, 192
-© Springer International Publishing Switzerland 2016
-D. Moore, Applied Survival Analysis Using R, Use R!,
+
+
 DOI 10.1007/978-3-319-31245-3
 223224
 profile likelihood, 142, 143
@@ -11325,8 +11414,8 @@ plotpath, 196
 predict, 197
 rms
 cph, 71
-© Springer International Publishing Switzerland 2016
-D. Moore, Applied Survival Analysis Using R, Use R!,
+
+
 DOI 10.1007/978-3-319-31245-3
 225226
 ssym
